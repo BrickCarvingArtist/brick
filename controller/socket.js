@@ -12,19 +12,21 @@ export default (app, {client}) => {
 	chat.attach(app);
 	return chat
 		.on("connection", async ({socket}) => {
-			const {
-				user
-			} = await getCookie(client, socket.handshake.headers.cookie),
-			id = getId(socket.id);
-			UserCache[id] = {
-				user,
-				head : `http://static.ikindness.cn/www/static/image/banner/${Math.ceil(Math.random()*6)}.jpg`
-			};
-			chat.broadcast("connections", {
-				online : chat.connections.size,
-				user,
-				status : 1
-			});
+			try{
+				const {
+					user
+				} = await getCookie(client, socket.handshake.headers.cookie),
+				id = getId(socket.id);
+				UserCache[id] = {
+					user,
+					head : `http://static.ikindness.cn/www/static/image/banner/${Math.ceil(Math.random()*6)}.jpg`
+				};
+				chat.broadcast("connections", {
+					online : chat.connections.size,
+					user,
+					status : 1
+				});
+			}catch(e){}
 		})
 		.on("disconnect", ({socket}) => {
 			const id = getId(socket.id),

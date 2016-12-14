@@ -2,10 +2,7 @@ import {readFile} from "./util";
 const route = [
 	"/",
 	"/signIn",
-	"/signUp",
-	"/chat",
-	"/all",
-	"/me"
+	"/signUp"
 ];
 export {
 	route
