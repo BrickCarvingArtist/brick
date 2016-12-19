@@ -28,7 +28,7 @@
     "email": "BrickCarvingArtist@foxmail.com"
   },
   "scripts": {
-    "preinstall": "git pull $npm_package_repository_url && redis-server -v",
+    "preinstall": "redis-server -v & git pull $npm_package_repository_url",
     "redis": "redis-server --port 16667 &",
     "prepare": "npm run redis",
     "start": "node server.js"
