@@ -2,7 +2,6 @@ import "babel-polyfill";
 import Koa from "koa";
 import Router from "koa-router";
 import body from "koa-better-body";
-import cors from "koa-cors";
 import serve from "koa-static";
 import session from "koa-generic-session";
 import redisStore from "koa-redis";
