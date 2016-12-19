@@ -1,12 +1,4 @@
 import {readFile} from "./util";
-const route = [
-	"/",
-	"/signIn",
-	"/signUp"
-];
-export {
-	route
-};
 export default [
 	{
 		from : "*",

@@ -1,6 +1,7 @@
 import fs from "fs";
+import {resolve} from "path";
 import {createRenderer} from "vue-server-renderer";
-const readFile = function(){
+export const readFile = function(){
 	return new Promise((resolve, reject) => {
 		fs.readFile(...arguments, (err, data) => {
 			err && reject(err);
@@ -8,7 +9,7 @@ const readFile = function(){
 		});
 	});
 };
-const renderToString = (() => {
+export const renderToString = (() => {
 	const {renderToString} = createRenderer();
 	return app => {
 		return new Promise((resolve, reject) => {
@@ -19,7 +20,3 @@ const renderToString = (() => {
 		});
 	};
 })();
-export {
-	readFile,
-	renderToString
-};

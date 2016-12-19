@@ -64,5 +64,31 @@ export default [
 				message : ["用户名或密码错误", "登录成功"][isAuth]
 			};
 		}
+	},
+	{
+		from : "/api/isAuth",
+		method : "get",
+		action({response, session}){
+			response.body = do{
+				if(session.user){
+					({
+						code : 0,
+						message : "authed"
+					})
+				}else{
+					({
+						code : 1,
+						message : "not authed"
+					})
+				}
+			}
+		}
+	},
+	{
+		from : "/api/getNews/:index",
+		method : "get",
+		async action({request, params, response}){
+			response.body = await (await fetch(`http://www.ikindness.cn/api/article/fetch?index=${params.index}`)).json();
+		}
 	}
 ];
