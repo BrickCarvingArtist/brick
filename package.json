@@ -1,8 +1,7 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "brick",
+  "version": "0.0.2",
+  "description": "An online chat app",
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
@@ -21,9 +20,31 @@
     "node-fetch": "^1.6.3",
     "vue-server-renderer": "^2.1.4"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrickCarvingArtist/brick.git"
   },
-  "author": "",
-  "license": "ISC"
+  "bugs": {
+    "url" : "https://github.com/BrickCarvingArtist/brick/issues",
+    "email" : "BrickCarvingArtist@foxmail.com"
+  },
+  "scripts": {
+    "preinstall": "redis-server -v && git pull $npm_package_repository_url",
+    "redis": "redis-server --port 16667 &",
+    "prepare": "npm run redis",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "brick"
+  ],
+  "author": {
+    "name": "BrickCarvingArtist",
+    "email": "BrickCarvingArtist@foxmail.com",
+    "url": "http://www.ikindness.cn/"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6.0.0"
+  }
 }
