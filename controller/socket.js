@@ -1,5 +1,5 @@
 import IO from "koa-socket";
-export default (app, {client}) => {
+export default app => {
 	const chat = new IO("chat");
 	const UserCache = {};
 	const qs = cookie => cookie.split("; ").reduce((oCookie, item) => {
@@ -10,7 +10,7 @@ export default (app, {client}) => {
 	const getCookie = async (client, cookie) => JSON.parse(await client.get(`koa:sess:${qs(cookie)["koa.sid"]}`));
 	const getId = id => id.split("#")[1];
 	chat.attach(app);
-	return chat
+	chat
 		.on("connection", async ({socket}) => {
 			try{
 				const {
@@ -53,4 +53,5 @@ export default (app, {client}) => {
 				head
 			});
 		});
+	return app;
 };

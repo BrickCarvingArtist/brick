@@ -1,14 +1,15 @@
 import fs from "fs";
 import {resolve} from "path";
 import {createRenderer} from "vue-server-renderer";
-export const readFile = function(){
+const promisify = fn => function(){
 	return new Promise((resolve, reject) => {
-		fs.readFile(...arguments, (err, data) => {
+		fn(...arguments, (err, data) => {
 			err && reject(err);
 			resolve(data);
 		});
 	});
 };
+export const readFile = promisify(fs.readFile);
 export const renderToString = (() => {
 	const {renderToString} = createRenderer();
 	return app => {

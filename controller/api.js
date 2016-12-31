@@ -1,4 +1,6 @@
 import fetch from "node-fetch";
+import multer from "koa-multer";
+import upload from "./upload";
 const User = {};
 export default [
 	{
@@ -27,7 +29,7 @@ export default [
 			const {
 				user,
 				password
-			} = request.fields;
+			} = request.body;
 			if(User[user]){
 				return response.body = {
 					code : 1,
@@ -49,7 +51,7 @@ export default [
 			const {
 				user,
 				password
-			} = request.fields;
+			} = request.body;
 			if(session.user === user){
 				return response.body = {
 					code : 1,
@@ -89,6 +91,14 @@ export default [
 		method : "get",
 		async action({request, params, response}){
 			response.body = await (await fetch(`http://www.ikindness.cn/api/article/fetch?index=${params.index}`)).json();
+		}
+	},
+	{
+		from : "/api/upload",
+		method : "post",
+		middleware : multer().single("file"),
+		async action({req, response}){
+			response.body = await upload(req.file);
 		}
 	}
 ];
