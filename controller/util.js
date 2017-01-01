@@ -2,12 +2,10 @@ import fs from "fs";
 import {resolve} from "path";
 import {createRenderer} from "vue-server-renderer";
 const promisify = fn => function(){
-	return new Promise((resolve, reject) => {
-		fn(...arguments, (err, data) => {
-			err && reject(err);
-			resolve(data);
-		});
-	});
+	return new Promise((resolve, reject) => fn(...arguments, (err, ...rest) => {
+		err && reject(err);
+		resolve(...rest);
+	}));
 };
 export const readFile = promisify(fs.readFile);
 export const renderToString = (() => {
